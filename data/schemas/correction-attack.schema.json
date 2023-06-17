@@ -1,0 +1,198 @@
+{
+  "title": "CorrectionAttack",
+  "type": "object",
+  "properties": {
+    "correction": {
+      "$ref": "#/definitions/Correction"
+    },
+    "override": {
+      "$ref": "#/definitions/Override"
+    },
+    "ratio": {
+      "$ref": "#/definitions/Ratio"
+    }
+  },
+  "required": [
+    "correction",
+    "override",
+    "ratio"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "AttributesCorrection": {
+      "title": "AttributesCorrection",
+      "type": "object",
+      "properties": {
+        "strength": {
+          "title": "Strength",
+          "type": "boolean"
+        },
+        "dexterity": {
+          "title": "Dexterity",
+          "type": "boolean"
+        },
+        "intelligence": {
+          "title": "Intelligence",
+          "type": "boolean"
+        },
+        "faith": {
+          "title": "Faith",
+          "type": "boolean"
+        },
+        "arcane": {
+          "title": "Arcane",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
+      "additionalProperties": false
+    },
+    "Correction": {
+      "title": "Correction",
+      "type": "object",
+      "properties": {
+        "physical": {
+          "$ref": "#/definitions/AttributesCorrection"
+        },
+        "magic": {
+          "$ref": "#/definitions/AttributesCorrection"
+        },
+        "fire": {
+          "$ref": "#/definitions/AttributesCorrection"
+        },
+        "lightning": {
+          "$ref": "#/definitions/AttributesCorrection"
+        },
+        "holy": {
+          "$ref": "#/definitions/AttributesCorrection"
+        }
+      },
+      "required": [
+        "physical",
+        "magic",
+        "fire",
+        "lightning",
+        "holy"
+      ],
+      "additionalProperties": false
+    },
+    "AttributesOverride": {
+      "title": "AttributesOverride",
+      "type": "object",
+      "properties": {
+        "strength": {
+          "title": "Strength",
+          "type": "number"
+        },
+        "dexterity": {
+          "title": "Dexterity",
+          "type": "number"
+        },
+        "intelligence": {
+          "title": "Intelligence",
+          "type": "number"
+        },
+        "faith": {
+          "title": "Faith",
+          "type": "number"
+        },
+        "arcane": {
+          "title": "Arcane",
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Override": {
+      "title": "Override",
+      "type": "object",
+      "properties": {
+        "physical": {
+          "$ref": "#/definitions/AttributesOverride"
+        },
+        "magic": {
+          "$ref": "#/definitions/AttributesOverride"
+        },
+        "fire": {
+          "$ref": "#/definitions/AttributesOverride"
+        },
+        "lightning": {
+          "$ref": "#/definitions/AttributesOverride"
+        },
+        "holy": {
+          "$ref": "#/definitions/AttributesOverride"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AttributesRatio": {
+      "title": "AttributesRatio",
+      "type": "object",
+      "properties": {
+        "strength": {
+          "title": "Strength",
+          "type": "number"
+        },
+        "dexterity": {
+          "title": "Dexterity",
+          "type": "number"
+        },
+        "intelligence": {
+          "title": "Intelligence",
+          "type": "number"
+        },
+        "faith": {
+          "title": "Faith",
+          "type": "number"
+        },
+        "arcane": {
+          "title": "Arcane",
+          "type": "number"
+        }
+      },
+      "required": [
+        "strength",
+        "dexterity",
+        "intelligence",
+        "faith",
+        "arcane"
+      ],
+      "additionalProperties": false
+    },
+    "Ratio": {
+      "title": "Ratio",
+      "type": "object",
+      "properties": {
+        "physical": {
+          "$ref": "#/definitions/AttributesRatio"
+        },
+        "magic": {
+          "$ref": "#/definitions/AttributesRatio"
+        },
+        "fire": {
+          "$ref": "#/definitions/AttributesRatio"
+        },
+        "lightning": {
+          "$ref": "#/definitions/AttributesRatio"
+        },
+        "holy": {
+          "$ref": "#/definitions/AttributesRatio"
+        }
+      },
+      "required": [
+        "physical",
+        "magic",
+        "fire",
+        "lightning",
+        "holy"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

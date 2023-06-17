@@ -1,0 +1,17 @@
+pub mod ammo;
+pub mod armaments;
+pub mod armor;
+pub mod ashes_of_war;
+pub mod bolstering_materials;
+pub mod correction_attack;
+pub mod correction_graph;
+pub mod crafting_materials;
+pub mod gestures;
+pub mod info;
+pub mod keys;
+pub mod reinforcements;
+pub mod shop;
+pub mod spells;
+pub mod spirit_ashes;
+pub mod talismans;
+pub mod tools;

@@ -6,3 +6,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+anyhow = "1.0.71"
+dotenv = "0.15.0"
+serde_json = "1.0.97"
+tracing = "0.1.37"
+tracing-subscriber = "0.3.17"
