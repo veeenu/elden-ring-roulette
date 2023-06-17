@@ -8,7 +8,7 @@ use std::{
 };
 
 use anyhow::{anyhow, Result};
-use tracing::metadata::LevelFilter;
+use tracing::{info, metadata::LevelFilter};
 
 fn main() -> Result<()> {
     dotenv::dotenv().ok();
@@ -69,6 +69,7 @@ fn codegen() -> Result<()> {
     ];
 
     for schema in SCHEMAS {
+        info!("Generating schema for {schema}...");
         let schema_code = run_cmd([
             "quicktype",
             "-l",
@@ -119,7 +120,7 @@ fn codegen_dir() -> PathBuf {
 }
 
 fn schema_file(schema: &str) -> PathBuf {
-    project_root().join("data/schema").join(format!("{schema}.schema.json"))
+    project_root().join("data/schemas").join(format!("{schema}.schema.json"))
 }
 
 fn schema_type_file(schema: &str) -> PathBuf {
