@@ -11,28 +11,31 @@
 //     let model: tools.schema = serde_json::from_str(&json).unwrap();
 // }
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ToolsSchema {
-    /// Defines whether the Tool is available always, only during singleplayer or only during
-    /// multiplayer.
+    /// Defines whether the Tool is available always, only during singleplayer
+    /// or only during multiplayer.
     availability: ToolAvailability,
     /// Tool category to discern its use.
     category: ToolCategory,
-    /// Array of lines of the in-game description, each element is separated by a new line. A
-    /// line may contain multiple sentences, or be empty if in between paragraphs.
+    /// Array of lines of the in-game description, each element is separated by
+    /// a new line. A line may contain multiple sentences, or be empty if in
+    /// between paragraphs.
     description: Vec<String>,
     /// Effects of the Tool.
     effects: Vec<Effect>,
     /// Cost of FP to use.
     fp_cost: i64,
-    /// Full ID of the Item in capital hexadecimal form. IDs differ per affinity or upgrade level.
+    /// Full ID of the Item in capital hexadecimal form. IDs differ per affinity
+    /// or upgrade level.
     full_hex_id: String,
-    /// ID of the icon which can be shared across many items. Icons can be sourced from the game
-    /// files using ERDB.
+    /// ID of the icon which can be shared across many items. Icons can be
+    /// sourced from the game files using ERDB.
     icon: i64,
-    /// ID of the Item in its individual class. IDs differ per affinity or upgrade level.
+    /// ID of the Item in its individual class. IDs differ per affinity or
+    /// upgrade level.
     id: i64,
     /// Specifies whether the Tool is consumed on use.
     is_consumed: bool,
@@ -60,8 +63,8 @@ pub struct ToolsSchema {
     summary: String,
 }
 
-/// Defines whether the Tool is available always, only during singleplayer or only during
-/// multiplayer.
+/// Defines whether the Tool is available always, only during singleplayer or
+/// only during multiplayer.
 ///
 /// An enumeration.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -100,13 +103,13 @@ pub struct Effect {
     attribute: AttributeName,
     /// List of conditions which trigger the effect, none for passive effects.
     conditions: Option<Vec<String>>,
-    /// Specifies whether the value is multiplicative (ex. rune acquisition) or additive (ex. +5
-    /// strength).
+    /// Specifies whether the value is multiplicative (ex. rune acquisition) or
+    /// additive (ex. +5 strength).
     model: Option<EffectModel>,
     /// Interval in seconds on how often the effect gets applied.
     tick_interval: Option<f64>,
-    /// The kind of the effect, considering the whole context (`value` *alone* can mean different
-    /// things depending on `attribute` and `model`).
+    /// The kind of the effect, considering the whole context (`value` *alone*
+    /// can mean different things depending on `attribute` and `model`).
     #[serde(rename = "type")]
     effect_type: Option<EffectType>,
     /// Value modifying the attribute.
@@ -255,8 +258,8 @@ pub enum AttributeName {
     Vitality,
 }
 
-/// The kind of the effect, considering the whole context (`value` *alone* can mean different
-/// things depending on `attribute` and `model`).
+/// The kind of the effect, considering the whole context (`value` *alone* can
+/// mean different things depending on `attribute` and `model`).
 ///
 /// An enumeration.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -267,8 +270,8 @@ pub enum EffectType {
     Positive,
 }
 
-/// Specifies whether the value is multiplicative (ex. rune acquisition) or additive (ex. +5
-/// strength).
+/// Specifies whether the value is multiplicative (ex. rune acquisition) or
+/// additive (ex. +5 strength).
 ///
 /// An enumeration.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -280,25 +283,28 @@ pub enum EffectModel {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LocationDetail {
-    /// List of situations which cause the item to become unavailable in full sentences.
+    /// List of situations which cause the item to become unavailable in full
+    /// sentences.
     blockers: Option<Vec<String>>,
     /// The type of currency this item is bought for, if applicable.
     currency: Option<Currency>,
-    /// Exact description on where to find the Item if summary cannot be straightfoward enough.
+    /// Exact description on where to find the Item if summary cannot be
+    /// straightfoward enough.
     directions: Option<String>,
     /// The specific location in which the Item is found.
     location: Option<Location>,
-    /// The amount of Currency the Item is bought for at this location, if applicable.
+    /// The amount of Currency the Item is bought for at this location, if
+    /// applicable.
     price_bought: Option<i64>,
-    /// Specifies the amount if an integer, otherwise `infinite` if the Item respawns or can be
-    /// purchased infinitely.
+    /// Specifies the amount if an integer, otherwise `infinite` if the Item
+    /// respawns or can be purchased infinitely.
     quantity: Option<Quantity>,
     /// The generic region in which the Item is found.
     region: Option<Region>,
     /// List of requirements which make the item available in full sentences.
     requirements: Option<Vec<String>>,
-    /// Short, consice summary of the location. To help concatenating with other data, there are
-    /// no capital letters or periods at the end.
+    /// Short, consice summary of the location. To help concatenating with other
+    /// data, there are no capital letters or periods at the end.
     summary: Option<String>,
 }
 
@@ -755,8 +761,8 @@ pub enum Location {
     ZamorRuins,
 }
 
-/// Specifies the amount if an integer, otherwise `infinite` if the Item respawns or can be
-/// purchased infinitely.
+/// Specifies the amount if an integer, otherwise `infinite` if the Item
+/// respawns or can be purchased infinitely.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Quantity {

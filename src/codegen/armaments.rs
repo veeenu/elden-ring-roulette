@@ -11,16 +11,17 @@
 //     let model: armaments.schema = serde_json::from_str(&json).unwrap();
 // }
 
-use serde::{Serialize, Deserialize};
 use std::collections::HashMap;
+
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ArmamentsSchema {
-    /// Mapping of possible affinities to their individual properties. `Standard` is always
-    /// present.
+    /// Mapping of possible affinities to their individual properties.
+    /// `Standard` is always present.
     affinity: HashMap<String, AffinityProperties>,
-    /// Specifies whether other Ashes of War can be put on the Armament and its affinity
-    /// potentially changed.
+    /// Specifies whether other Ashes of War can be put on the Armament and its
+    /// affinity potentially changed.
     allow_ash_of_war: bool,
     /// List of attack attributes the Armament can deal, usually 2.
     attack_attributes: Vec<AttackAttribute>,
@@ -30,21 +31,25 @@ pub struct ArmamentsSchema {
     category: ArmamentCategory,
     /// Index of the default Skill the Armament comes with.
     default_skill_id: i64,
-    /// Array of lines of the in-game description, each element is separated by a new line. A
-    /// line may contain multiple sentences, or be empty if in between paragraphs.
+    /// Array of lines of the in-game description, each element is separated by
+    /// a new line. A line may contain multiple sentences, or be empty if in
+    /// between paragraphs.
     description: Vec<String>,
     /// Effects of the Armament.
     effects: Vec<Effect>,
-    /// Full ID of the Item in capital hexadecimal form. IDs differ per affinity or upgrade level.
+    /// Full ID of the Item in capital hexadecimal form. IDs differ per affinity
+    /// or upgrade level.
     full_hex_id: String,
-    /// ID of the icon which can be shared across many items. Icons can be sourced from the game
-    /// files using ERDB.
+    /// ID of the icon which can be shared across many items. Icons can be
+    /// sourced from the game files using ERDB.
     icon: i64,
-    /// ID of the Item in its individual class. IDs differ per affinity or upgrade level.
+    /// ID of the Item in its individual class. IDs differ per affinity or
+    /// upgrade level.
     id: i64,
     /// Specifies whether the Armament is buffable.
     is_buffable: bool,
-    /// Specifies whether the Armament is used for guarding when equipped in left hand.
+    /// Specifies whether the Armament is used for guarding when equipped in
+    /// left hand.
     is_l1_guard: bool,
     /// Specifies whether the Item is visible to other players if dropped.
     is_tradable: bool,
@@ -64,14 +69,15 @@ pub struct ArmamentsSchema {
     remarks: Option<Vec<String>>,
     /// Attribute requirements of the Armament.
     requirements: Requirements,
-    /// Multiplier used for calculating the effective stamina consumption from the Skill's base
-    /// stamina cost.
+    /// Multiplier used for calculating the effective stamina consumption from
+    /// the Skill's base stamina cost.
     sp_consumption_rate: f64,
     /// Short description of the Item.
     summary: String,
-    /// Array of Rune costs to upgrade to each level, +1 starting at position 0. Empty if the
-    /// Armament is non-upgradable, otherwise it contains either 10 or 25 integers.
-    /// `upgrade_material` can be used to tell the actual length.
+    /// Array of Rune costs to upgrade to each level, +1 starting at position 0.
+    /// Empty if the Armament is non-upgradable, otherwise it contains
+    /// either 10 or 25 integers. `upgrade_material` can be used to tell the
+    /// actual length.
     upgrade_costs: Vec<i64>,
     /// Stones the Armament upgrades with, if upgradable.
     upgrade_material: ArmamentUpgradeMaterial,
@@ -81,11 +87,11 @@ pub struct ArmamentsSchema {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AffinityProperties {
-    /// ID of attack element correction, refer to the `Correction Attack` table to look up
-    /// definitions.
+    /// ID of attack element correction, refer to the `Correction Attack` table
+    /// to look up definitions.
     correction_attack_id: i64,
-    /// ID of calc correction for each damage type, refer to the `Correction Graph` table to look
-    /// up value multipliers.
+    /// ID of calc correction for each damage type, refer to the `Correction
+    /// Graph` table to look up value multipliers.
     correction_calc_id: CorrectionCalcId,
     /// Base attack power values.
     damage: Damage,
@@ -95,24 +101,25 @@ pub struct AffinityProperties {
     guard: Guard,
     /// ID override for the Armament with Affinity applied.
     id: i64,
-    /// ID of reinforcement, refer to the `Reinforcements` table to look up value changes per
-    /// level.
+    /// ID of reinforcement, refer to the `Reinforcements` table to look up
+    /// value changes per level.
     reinforcement_id: i64,
     /// Base guarded resistances values.
     resistance: Resistance,
     /// Base attribute scaling values.
     scaling: Scaling,
-    /// Array of status effects per Armament level which get upgraded alongside. Given the
-    /// Armament level as the index to this array, the value should be overlaid on the
-    /// `status_effects` property. In practice, only a single effect is set to be upgradable, but
-    /// technically game params can do up to three.
+    /// Array of status effects per Armament level which get upgraded alongside.
+    /// Given the Armament level as the index to this array, the value
+    /// should be overlaid on the `status_effects` property. In practice,
+    /// only a single effect is set to be upgradable, but technically game
+    /// params can do up to three.
     status_effect_overlay: Vec<Resistance>,
     /// Status effects of the Armament, dealt on hit.
     status_effects: Resistance,
 }
 
-/// ID of calc correction for each damage type, refer to the `Correction Graph` table to look
-/// up value multipliers.
+/// ID of calc correction for each damage type, refer to the `Correction Graph`
+/// table to look up value multipliers.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CorrectionCalcId {
     bleed: i64,
@@ -242,13 +249,13 @@ pub struct Effect {
     attribute: AttributeName,
     /// List of conditions which trigger the effect, none for passive effects.
     conditions: Option<Vec<String>>,
-    /// Specifies whether the value is multiplicative (ex. rune acquisition) or additive (ex. +5
-    /// strength).
+    /// Specifies whether the value is multiplicative (ex. rune acquisition) or
+    /// additive (ex. +5 strength).
     model: Option<EffectModel>,
     /// Interval in seconds on how often the effect gets applied.
     tick_interval: Option<f64>,
-    /// The kind of the effect, considering the whole context (`value` *alone* can mean different
-    /// things depending on `attribute` and `model`).
+    /// The kind of the effect, considering the whole context (`value` *alone*
+    /// can mean different things depending on `attribute` and `model`).
     #[serde(rename = "type")]
     effect_type: Option<EffectType>,
     /// Value modifying the attribute.
@@ -397,8 +404,8 @@ pub enum AttributeName {
     Vitality,
 }
 
-/// The kind of the effect, considering the whole context (`value` *alone* can mean different
-/// things depending on `attribute` and `model`).
+/// The kind of the effect, considering the whole context (`value` *alone* can
+/// mean different things depending on `attribute` and `model`).
 ///
 /// An enumeration.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -409,8 +416,8 @@ pub enum EffectType {
     Positive,
 }
 
-/// Specifies whether the value is multiplicative (ex. rune acquisition) or additive (ex. +5
-/// strength).
+/// Specifies whether the value is multiplicative (ex. rune acquisition) or
+/// additive (ex. +5 strength).
 ///
 /// An enumeration.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -422,25 +429,28 @@ pub enum EffectModel {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LocationDetail {
-    /// List of situations which cause the item to become unavailable in full sentences.
+    /// List of situations which cause the item to become unavailable in full
+    /// sentences.
     blockers: Option<Vec<String>>,
     /// The type of currency this item is bought for, if applicable.
     currency: Option<Currency>,
-    /// Exact description on where to find the Item if summary cannot be straightfoward enough.
+    /// Exact description on where to find the Item if summary cannot be
+    /// straightfoward enough.
     directions: Option<String>,
     /// The specific location in which the Item is found.
     location: Option<Location>,
-    /// The amount of Currency the Item is bought for at this location, if applicable.
+    /// The amount of Currency the Item is bought for at this location, if
+    /// applicable.
     price_bought: Option<i64>,
-    /// Specifies the amount if an integer, otherwise `infinite` if the Item respawns or can be
-    /// purchased infinitely.
+    /// Specifies the amount if an integer, otherwise `infinite` if the Item
+    /// respawns or can be purchased infinitely.
     quantity: Option<Quantity>,
     /// The generic region in which the Item is found.
     region: Option<Region>,
     /// List of requirements which make the item available in full sentences.
     requirements: Option<Vec<String>>,
-    /// Short, consice summary of the location. To help concatenating with other data, there are
-    /// no capital letters or periods at the end.
+    /// Short, consice summary of the location. To help concatenating with other
+    /// data, there are no capital letters or periods at the end.
     summary: Option<String>,
 }
 
@@ -897,8 +907,8 @@ pub enum Location {
     ZamorRuins,
 }
 
-/// Specifies the amount if an integer, otherwise `infinite` if the Item respawns or can be
-/// purchased infinitely.
+/// Specifies the amount if an integer, otherwise `infinite` if the Item
+/// respawns or can be purchased infinitely.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Quantity {

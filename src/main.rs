@@ -1,12 +1,7 @@
-use std::collections::HashMap;
-
-use elden_ring_roulette::codegen::armaments::ArmamentsSchema;
+use elden_ring_roulette::data::ARMAMENTS;
 
 fn main() {
-    let armaments: HashMap<String, ArmamentsSchema> =
-        serde_json::from_str(include_str!("../data/objects/armaments.json")).unwrap();
-
-    for (k, v) in armaments {
+    for (k, v) in &*ARMAMENTS {
         println!("{k}: {v:#?}");
     }
 }

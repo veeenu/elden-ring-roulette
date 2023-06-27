@@ -1,14 +1,13 @@
-use std::{
-    env,
-    ffi::OsStr,
-    fs::{self, File},
-    io::Write,
-    path::{Path, PathBuf},
-    process::Command,
-};
+use std::env;
+use std::ffi::OsStr;
+use std::fs::{self, File};
+use std::io::Write;
+use std::path::{Path, PathBuf};
+use std::process::Command;
 
 use anyhow::{anyhow, Result};
-use tracing::{info, metadata::LevelFilter};
+use tracing::info;
+use tracing::metadata::LevelFilter;
 
 fn main() -> Result<()> {
     dotenv::dotenv().ok();

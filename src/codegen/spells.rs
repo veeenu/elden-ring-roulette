@@ -11,28 +11,32 @@
 //     let model: spells.schema = serde_json::from_str(&json).unwrap();
 // }
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SpellsSchema {
     /// Category of the Spell.
     category: SpellCategory,
-    /// Array of lines of the in-game description, each element is separated by a new line. A
-    /// line may contain multiple sentences, or be empty if in between paragraphs.
+    /// Array of lines of the in-game description, each element is separated by
+    /// a new line. A line may contain multiple sentences, or be empty if in
+    /// between paragraphs.
     description: Vec<String>,
     /// Cost of FP to cast.
     fp_cost: i64,
-    /// Additional cost of FP for a charged/continued attack. This is on top of the regular cost,
-    /// not the full cost. Always 0 for non-holdable Spells.
+    /// Additional cost of FP for a charged/continued attack. This is on top of
+    /// the regular cost, not the full cost. Always 0 for non-holdable
+    /// Spells.
     fp_cost_extra: i64,
-    /// Full ID of the Item in capital hexadecimal form. IDs differ per affinity or upgrade level.
+    /// Full ID of the Item in capital hexadecimal form. IDs differ per affinity
+    /// or upgrade level.
     full_hex_id: String,
     /// Defines the behavior of the Spell when the cast is held.
     hold_action: SpellHoldAction,
-    /// ID of the icon which can be shared across many items. Icons can be sourced from the game
-    /// files using ERDB.
+    /// ID of the icon which can be shared across many items. Icons can be
+    /// sourced from the game files using ERDB.
     icon: i64,
-    /// ID of the Item in its individual class. IDs differ per affinity or upgrade level.
+    /// ID of the Item in its individual class. IDs differ per affinity or
+    /// upgrade level.
     id: i64,
     /// Specifies whether the Spell can be cast while on horseback.
     is_horseback_castable: bool,
@@ -62,8 +66,9 @@ pub struct SpellsSchema {
     slots_used: i64,
     /// Cost of stamina to cast.
     sp_cost: i64,
-    /// Additional cost of stamina for a charged/continued attack. This is on top of the regular
-    /// cost, not the full cost. Always 0 for non-holdable Spells.
+    /// Additional cost of stamina for a charged/continued attack. This is on
+    /// top of the regular cost, not the full cost. Always 0 for
+    /// non-holdable Spells.
     sp_cost_extra: i64,
     /// Short description of the Item.
     summary: String,
@@ -90,25 +95,28 @@ pub enum SpellHoldAction {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LocationDetail {
-    /// List of situations which cause the item to become unavailable in full sentences.
+    /// List of situations which cause the item to become unavailable in full
+    /// sentences.
     blockers: Option<Vec<String>>,
     /// The type of currency this item is bought for, if applicable.
     currency: Option<Currency>,
-    /// Exact description on where to find the Item if summary cannot be straightfoward enough.
+    /// Exact description on where to find the Item if summary cannot be
+    /// straightfoward enough.
     directions: Option<String>,
     /// The specific location in which the Item is found.
     location: Option<Location>,
-    /// The amount of Currency the Item is bought for at this location, if applicable.
+    /// The amount of Currency the Item is bought for at this location, if
+    /// applicable.
     price_bought: Option<i64>,
-    /// Specifies the amount if an integer, otherwise `infinite` if the Item respawns or can be
-    /// purchased infinitely.
+    /// Specifies the amount if an integer, otherwise `infinite` if the Item
+    /// respawns or can be purchased infinitely.
     quantity: Option<Quantity>,
     /// The generic region in which the Item is found.
     region: Option<Region>,
     /// List of requirements which make the item available in full sentences.
     requirements: Option<Vec<String>>,
-    /// Short, consice summary of the location. To help concatenating with other data, there are
-    /// no capital letters or periods at the end.
+    /// Short, consice summary of the location. To help concatenating with other
+    /// data, there are no capital letters or periods at the end.
     summary: Option<String>,
 }
 
@@ -565,8 +573,8 @@ pub enum Location {
     ZamorRuins,
 }
 
-/// Specifies the amount if an integer, otherwise `infinite` if the Item respawns or can be
-/// purchased infinitely.
+/// Specifies the amount if an integer, otherwise `infinite` if the Item
+/// respawns or can be purchased infinitely.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Quantity {

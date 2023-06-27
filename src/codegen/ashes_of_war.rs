@@ -11,7 +11,7 @@
 //     let model: ashes-of-war.schema = serde_json::from_str(&json).unwrap();
 // }
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AshesOfWarSchema {
@@ -19,15 +19,18 @@ pub struct AshesOfWarSchema {
     armament_categories: Vec<ArmamentCategory>,
     /// Default Affinity the Ash of War comes with.
     default_affinity: Affinity,
-    /// Array of lines of the in-game description, each element is separated by a new line. A
-    /// line may contain multiple sentences, or be empty if in between paragraphs.
+    /// Array of lines of the in-game description, each element is separated by
+    /// a new line. A line may contain multiple sentences, or be empty if in
+    /// between paragraphs.
     description: Vec<String>,
-    /// Full ID of the Item in capital hexadecimal form. IDs differ per affinity or upgrade level.
+    /// Full ID of the Item in capital hexadecimal form. IDs differ per affinity
+    /// or upgrade level.
     full_hex_id: String,
-    /// ID of the icon which can be shared across many items. Icons can be sourced from the game
-    /// files using ERDB.
+    /// ID of the icon which can be shared across many items. Icons can be
+    /// sourced from the game files using ERDB.
     icon: i64,
-    /// ID of the Item in its individual class. IDs differ per affinity or upgrade level.
+    /// ID of the Item in its individual class. IDs differ per affinity or
+    /// upgrade level.
     id: i64,
     /// Specifies whether the Item is visible to other players if dropped.
     is_tradable: bool,
@@ -39,7 +42,8 @@ pub struct AshesOfWarSchema {
     max_stored: i64,
     /// Name of the Item.
     name: String,
-    /// List of Affinities the Ash of War can provide, assuming Whetblades are available.
+    /// List of Affinities the Ash of War can provide, assuming Whetblades are
+    /// available.
     possible_affinities: Vec<Affinity>,
     /// The amount of Runes the Item is sold for, 0 if not applicabe.
     price_sold: i64,
@@ -129,25 +133,28 @@ pub enum Affinity {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LocationDetail {
-    /// List of situations which cause the item to become unavailable in full sentences.
+    /// List of situations which cause the item to become unavailable in full
+    /// sentences.
     blockers: Option<Vec<String>>,
     /// The type of currency this item is bought for, if applicable.
     currency: Option<Currency>,
-    /// Exact description on where to find the Item if summary cannot be straightfoward enough.
+    /// Exact description on where to find the Item if summary cannot be
+    /// straightfoward enough.
     directions: Option<String>,
     /// The specific location in which the Item is found.
     location: Option<Location>,
-    /// The amount of Currency the Item is bought for at this location, if applicable.
+    /// The amount of Currency the Item is bought for at this location, if
+    /// applicable.
     price_bought: Option<i64>,
-    /// Specifies the amount if an integer, otherwise `infinite` if the Item respawns or can be
-    /// purchased infinitely.
+    /// Specifies the amount if an integer, otherwise `infinite` if the Item
+    /// respawns or can be purchased infinitely.
     quantity: Option<Quantity>,
     /// The generic region in which the Item is found.
     region: Option<Region>,
     /// List of requirements which make the item available in full sentences.
     requirements: Option<Vec<String>>,
-    /// Short, consice summary of the location. To help concatenating with other data, there are
-    /// no capital letters or periods at the end.
+    /// Short, consice summary of the location. To help concatenating with other
+    /// data, there are no capital letters or periods at the end.
     summary: Option<String>,
 }
 
@@ -604,8 +611,8 @@ pub enum Location {
     ZamorRuins,
 }
 
-/// Specifies the amount if an integer, otherwise `infinite` if the Item respawns or can be
-/// purchased infinitely.
+/// Specifies the amount if an integer, otherwise `infinite` if the Item
+/// respawns or can be purchased infinitely.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Quantity {
